@@ -1,6 +1,7 @@
 {
   "name": "codemedic",
   "displayName": "CodeMedic AI",
+  "publisher": "Rujul Gupta",
   "description": "AI-powered code reviewer that scans, analyzes, and fixes JavaScript, HTML, and CSS using AI.",
   "version": "0.0.1",
   "engines": {
@@ -8,7 +9,7 @@
   },
   "categories": [
     "Programming Languages",
-    "Linters"
+    "Other"
   ],
   "activationEvents": [],
   "main": "./extension.js",

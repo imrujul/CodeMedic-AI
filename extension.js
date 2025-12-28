@@ -6,10 +6,6 @@ let pendingFixes = null;
 const history = [];
 const MAX_TURNS = 6; // last 6 user+model pairs
 
-// /**
-//  * @param {vscode.ExtensionContext} context
-//  */
-
 function trimHistory() {
   const maxEntries = MAX_TURNS * 2;
   if (history.length > maxEntries) {
@@ -33,7 +29,6 @@ function isCodeReviewRequest(text) {
     t.includes('code') && t.includes('file')
   );
 }
-
 
 // Read workspace files safely
 async function readWorkspaceFiles() {
@@ -85,7 +80,6 @@ ${f.content}
 `;
 }
 
-
 async function getGeminiClient() {
   const config = vscode.workspace.getConfiguration('codemedic');
   const apiKey = config.get('apiKey');
@@ -114,7 +108,6 @@ function buildFixSummary(fixes) {
     return `• ${fileName} – ${file.issues.slice(0, 2).join(', ')}`;
   }).join('\n');
 }
-
 
 function activate(context) {
   const openChatCommand = vscode.commands.registerCommand(
@@ -177,7 +170,6 @@ function activate(context) {
               text: 'Reviewing workspace files...'
             });
 
-
             if (files.length === 0) {
               panel.webview.postMessage({
                 type: 'botReply',
@@ -214,12 +206,11 @@ function activate(context) {
 
                 panel.webview.postMessage({
                   type: 'botReply',
-                  text: '✅ No issues found. Your code looks good.'
+                  text: 'No issues found. Your code looks good.'
                 });
 
                 return;
               }
-
 
               panel.webview.postMessage({
                 type: 'botReply',
@@ -229,7 +220,7 @@ function activate(context) {
             } catch {
               panel.webview.postMessage({
                 type: 'botReply',
-                text: raw // fallback if model fails JSON
+                text: raw
               });
             }
 
@@ -243,13 +234,12 @@ function activate(context) {
 
             panel.webview.postMessage({
               type: 'botReply',
-              text: `✅ Fixes applied successfully.\n\nSummary:\n${summary}`
+              text: `Fixes applied successfully.\n\nSummary:\n${summary}`
             });
 
             pendingFixes = null;
             return;
           }
-
 
           if (pendingFixes && message.text.toLowerCase() === 'no') {
             pendingFixes = null;
@@ -260,7 +250,7 @@ function activate(context) {
             return;
           }
 
-          // Add user message to history| normal chat mode 
+          // Add user message to history | normal chat mode 
           history.push({
             role: 'user',
             parts: [{ text: message.text }]
