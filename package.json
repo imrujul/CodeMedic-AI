@@ -1,0 +1,64 @@
+{
+  "name": "codemedic",
+  "displayName": "CodeMedic AI",
+  "description": "AI-powered code reviewer that scans, analyzes, and fixes JavaScript, HTML, and CSS using AI.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.107.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codemedic.reviewProject",
+        "title": "CodeMedic: Review Project"
+      },
+      {
+        "command": "codemedic.openChat",
+        "title": "CodeMedic: Open Chat"
+      }
+    ],
+    "configuration": {
+      "title": "CodeMedic",
+      "properties": {
+        "codemedic.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Gemini API key used by CodeMedic",
+          "scope": "application"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.107.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.39.1"
+  },
+  "dependencies": {
+    "@google/genai": "^1.34.0"
+  },
+  "configuration": {
+    "title": "CodeMedic",
+    "properties": {
+      "codemedic.apiKey": {
+        "type": "string",
+        "default": "",
+        "description": "Gemini API Key for CodeMedic"
+      }
+    }
+  }
+}
